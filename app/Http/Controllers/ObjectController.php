@@ -47,11 +47,15 @@ class ObjectController extends Controller
     }
 
     public function listAllObjects(){
-        $teachers = Objects::all();
-        if(empty($teachers)){
-            $teachers = array('error_code' => 400, 'error_msg' => 'No hay profesores encontrados');
-        }else{
-            return response()->json($teachers);
+        $response = Objects::all();
+        return response()->json($response);
+    }
+
+    public function listForSkill(Request $req){
+        $response = array('error_code' => 400, 'error_msg' => '');
+        if(!empty($req->skill)){
+            $response = Objects::where('skill', $req->skill)->get(['id','name','material_id','object_to_reuses_id','img','link_video','tools','explain','skill']);
         }
+        return response()->json($response);
     }
 }

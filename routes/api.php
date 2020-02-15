@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('object', 'ObjectController@findForAll');
 Route::get('object/objecttoreuse/{id}', 'ObjectController@findByObjects');
 Route::get('object/material/{id}', 'ObjectController@findByMaterial');
+Route::get('object/skill', 'ObjectController@listForSkill');
 Route::get('objecttoreuse', 'ObjectToReuseController@findAll');
 Route::get('objecttoreuse/{id}', 'ObjectToReuseController@findById');
 Route::get('material', 'MaterialController@findAll');
