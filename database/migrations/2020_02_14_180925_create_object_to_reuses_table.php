@@ -19,6 +19,7 @@ class CreateObjectToReusesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('material_id');
             $table->foreign('material_id')->references('id')->on('materials');
+            $table->string('img');
             $table->timestamps();
         });
     }

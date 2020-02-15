@@ -25,18 +25,18 @@ class ObjectController extends Controller
     public function findForAll(Request $req){
         $response = array('error_code' => 400, 'error_msg' => 'Error inserting info');
         if(!empty($req->name)){
-            $object_id = Material::where('name', $req->name)->first(['id']);
+            $object_id = Material::where('name', strtolower($req->name))->first(['id']);
             if(!empty($object_id)){
                 $object = Objects::where('material_id', $object_id->id)->get(['id','name','material_id','object_to_reuses_id','img','link_video','tools','explain','skill']);
                 return response() -> json($object);
             }
             else{
-                $object_id = ObjectToReuse::where('name', $req->name)->first(['id']);
+                $object_id = ObjectToReuse::where('name', strtolower($req->name))->first(['id']);
                 if(!empty($object_id)){
                     $object = Objects::where('object_to_reuses_id', $object_id->id)->get(['id','name','material_id','object_to_reuses_id','img','link_video','tools','explain','skill']);
                     return response() -> json($object);
                 }else{
-                    $object = Objects::where('name', $req->name)->get(['id','name','material_id','object_to_reuses_id','img','link_video','tools','explain','skill']);
+                    $object = Objects::where('name', strtolower($req->name))->get(['id','name','material_id','object_to_reuses_id','img','link_video','tools','explain','skill']);
                     if(!empty($object)){
                         return response() -> json($object);
                     }
