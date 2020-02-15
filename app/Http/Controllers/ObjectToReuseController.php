@@ -7,15 +7,15 @@ use App\ObjectToReuse;
 
 class ObjectToReuseController extends Controller
 {
-    public function findByName(Request $req){
+    public function findAll(){
         $response = array('error_code' => 400, 'error_msg' => '');
-        if(!empty($req)){
-            $object = ObjectToReuse::where('name', $req->name)->first(['id']);
-            if(!empty($req)){
-                return redirect()->action('ObjectController@findByObjects',['id' => $object]);
-            }
-        }
+        $response = ObjectToReuse::all(['id', 'name','material_id']);
+        return response()->json($response);
+    }
 
-        return response() -> json($response);
+    public function findById($id){
+        $response = array('error_code' => 400, 'error_msg' => '');
+        $response = ObjectToReuse::find($id)->get(['id', 'name']);
+        return response()->json($response);
     }
 }

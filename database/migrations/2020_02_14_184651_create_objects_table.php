@@ -25,7 +25,7 @@ class CreateObjectsTable extends Migration
             $table->string('link_video');
             $table->string('tools');
             $table->longText('explain');
-            $table->string('skill');
+            $table->enum('skill',['facil', 'normal', 'dificil']);
             $table->timestamps();
         });
     }

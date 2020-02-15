@@ -7,16 +7,15 @@ use App\Material;
 
 class MaterialController extends Controller
 {
-    public function findByName(Request $req){
+    public function findAll(){
         $response = array('error_code' => 400, 'error_msg' => '');
-        if(!empty($req)){
-            $object = Material::where('name', $req->name)->first(['id']);
-            if(!empty($req)){
-                return 1;
-                return redirect()->action('ObjectController@findByMaterial',['id' => $object]);
-            }
-        }
+        $response = Material::all(['id', 'name']);
+        return response()->json($response);
+    }
 
-        return redirect()->action('ObjectToReuseController@findByName',['Request' => $req]);
+    public function findById($id){
+        $response = array('error_code' => 400, 'error_msg' => '');
+        $response = Material::find($id)->get(['id', 'name']);
+        return response()->json($response);
     }
 }
