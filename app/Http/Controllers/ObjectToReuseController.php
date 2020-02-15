@@ -15,7 +15,7 @@ class ObjectToReuseController extends Controller
 
     public function findById($id){
         $response = array('error_code' => 400, 'error_msg' => '');
-        $response = ObjectToReuse::find($id)->get(['id', 'name']);
+        $response = ObjectToReuse::find($id)->first(['id', 'name','material_id']);
         return response()->json($response);
     }
 }

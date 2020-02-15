@@ -15,7 +15,7 @@ class MaterialController extends Controller
 
     public function findById($id){
         $response = array('error_code' => 400, 'error_msg' => '');
-        $response = Material::find($id)->get(['id', 'name']);
+        $response = Material::find($id)->first(['id', 'name']);
         return response()->json($response);
     }
 }
